@@ -1,0 +1,566 @@
+Project: RV Tech Labs Website
+1. Product Overview
+
+Product Name: RV Tech Labs
+Website Type: Corporate Technology Services Website
+Goal: Showcase services, projects, company details, attract clients, and generate leads.
+
+The website will present RV Tech Labs as a modern technology solutions company offering:
+
+• Web Development
+• App Development
+• Content Promotion
+• Technology Consulting
+
+The website will include:
+
+• Interactive UI
+• Animations
+• SEO optimization
+• AI Chatbot powered by Google Gemini API
+• Contact form powered by EmailJS (no backend)
+• Project showcase carousel
+• Careers page
+• Client testimonials
+
+2. SEO Requirements
+Primary SEO Title
+
+RV Tech Labs | Web Development, App Development & Digital Content Promotion
+
+Meta Description
+
+RV Tech Labs provides high-quality web development, mobile app development, and content promotion services to help businesses grow online. Build scalable digital solutions with our expert team.
+
+Keywords
+
+RV Tech Labs
+Web Development Company
+App Development Services
+Content Promotion Services
+Website Development
+Startup Tech Solutions
+
+SEO Structure
+
+Each page must include:
+
+• unique meta title
+• meta description
+• structured headings (H1 H2 H3)
+• schema markup for services
+• OpenGraph tags
+• sitemap.xml
+• robots.txt
+
+3. Target Users
+Primary Users
+
+• Startups
+• Small businesses
+• Entrepreneurs
+• Companies needing digital products
+
+Secondary Users
+
+• Job seekers
+• Tech partners
+• Investors
+
+4. Technology Stack
+
+Frontend Only Architecture
+
+Framework Options
+
+• Next.js (Recommended)
+• React
+• Tailwind CSS
+• Framer Motion (animations)
+
+Email System
+
+• EmailJS (no backend)
+
+Chatbot
+
+• Google Gemini API
+
+Hosting
+
+• Vercel / Netlify
+
+Database
+
+Not required
+
+5. Website Structure
+
+Main Pages
+
+1 Home
+2 About
+3 Services
+4 Projects
+5 Client Reviews
+6 Careers
+7 Contact
+
+6. Homepage
+Hero Section
+
+Headline
+
+Empowering Businesses with Smart Digital Solutions
+
+Subtext
+
+Web Development | App Development | Content Promotion
+
+Buttons
+
+Get Started
+Explore Services
+
+Animation
+
+• floating particles background
+• hero text fade animation
+• button hover animations
+
+Stats Section
+
+Animated counters
+
+• 100+ Clients
+• 50+ Projects
+• 5+ Years Experience
+• 24/7 Support
+
+Animation
+
+Number counting animation
+
+Services Preview
+
+3 Cards
+
+Web Development
+App Development
+Content Promotion
+
+Each card includes
+
+• icon
+• short description
+• Learn More button
+
+Animation
+
+Cards slide in on scroll
+
+Projects Carousel
+
+Left to right auto-scrolling loop
+
+Projects should move continuously.
+
+Example Projects
+
+1 Startup Portfolio Website
+2 E-commerce Platform
+3 Restaurant Ordering App
+4 Real Estate Listing Platform
+5 AI Blog Generator
+6 Digital Marketing Dashboard
+
+Carousel behavior
+
+• infinite loop
+• auto scroll
+• hover pause
+
+Client Testimonials
+
+Carousel of reviews
+
+Example
+
+Client 1
+
+RV Tech Labs built our website incredibly fast and the quality exceeded expectations.
+
+Client 2
+
+Their app development team delivered a perfect mobile application for our startup.
+
+Client 3
+
+Content promotion strategies helped us increase traffic by 300%.
+
+CTA Section
+
+Ready to Transform Your Business?
+
+Buttons
+
+Start Project
+Contact Us
+
+Background animation
+
+gradient motion background
+
+7. About Page
+Company Introduction
+
+RV Tech Labs is a technology company focused on helping startups and businesses build powerful digital products.
+
+Mission
+
+Deliver innovative technology solutions that drive business growth.
+
+Vision
+
+Become a trusted digital partner for companies worldwide.
+
+Founder Section
+
+Founder
+
+Name: (Add your founder name)
+
+Role
+
+Founder & CEO
+
+Description
+
+Technology entrepreneur focused on building scalable digital products and helping startups succeed.
+
+Co-Founder Section
+
+Name: (Add co-founder name)
+
+Role
+
+Co-Founder & CTO
+
+Description
+
+Expert in software architecture and digital transformation with strong experience in building high-performance systems.
+
+Core Values
+
+Innovation
+Client First
+Transparency
+Quality
+Growth Mindset
+
+Company Timeline
+
+Example
+
+2022 — RV Tech Labs Founded
+2023 — First 50 clients reached
+2024 — Expansion into mobile app development
+2025 — Launch of AI-based solutions
+
+8. Services Page
+
+Services Section
+
+Web Development
+
+Custom websites
+Business websites
+Landing pages
+E-commerce platforms
+
+Technologies
+
+React
+Next.js
+Node
+Cloud hosting
+
+App Development
+
+Android apps
+iOS apps
+Cross-platform apps
+Progressive Web Apps
+
+Technologies
+
+Flutter
+React Native
+Native development
+
+Content Promotion
+
+SEO optimization
+Social media promotion
+Content marketing
+Traffic growth strategies
+
+9. Projects Page
+
+Grid + carousel hybrid layout
+
+Projects displayed in cards.
+
+Example Projects
+
+Project 1
+
+Startup Portfolio Website
+
+Tech Stack
+
+React + Tailwind
+
+Project 2
+
+Online Store
+
+Tech
+
+Next.js + Stripe
+
+Project 3
+
+Restaurant Ordering App
+
+Tech
+
+Flutter
+
+Project 4
+
+AI Content Generator
+
+Tech
+
+OpenAI + React
+
+Project 5
+
+Marketing Dashboard
+
+Tech
+
+React + Charts
+
+Project 6
+
+Education Learning Platform
+
+Tech
+
+Next.js + Firebase
+
+10. Client Reviews Page
+
+Client testimonials displayed as cards.
+
+Each review contains
+
+• client name
+• company
+• rating stars
+• review text
+
+Example
+
+★★★★★
+
+RV Tech Labs built an amazing website for our company.
+
+11. Careers Page
+
+Sections
+
+Why Work With Us
+
+• Flexible work culture
+• Learning opportunities
+• Startup environment
+
+Open Positions
+
+Frontend Developer
+Backend Developer
+UI UX Designer
+Marketing Specialist
+
+Application Form
+
+Fields
+
+Name
+Email
+Phone
+Position
+Resume upload
+
+Email sent using EmailJS.
+
+12. Contact Page
+
+Contact Information
+
+Email
+Phone
+Location
+
+Contact Form
+
+Fields
+
+Name
+Email
+Company
+Service Needed
+Message
+
+Submit → EmailJS sends email to company inbox.
+
+13. Chatbot (AI Assistant)
+
+Chatbot Purpose
+
+Help visitors learn about
+
+• services
+• projects
+• company
+• pricing
+• contact
+
+Chatbot UI
+
+Floating chat icon bottom right.
+
+Click → open chat window.
+
+Chatbot Example Questions
+
+User: What services do you offer?
+
+Bot Response
+
+RV Tech Labs provides Web Development, App Development, and Content Promotion services.
+
+User: Show your projects
+
+Bot Response
+
+We have developed multiple projects including e-commerce platforms, startup websites, and mobile applications.
+
+User: How can I contact you?
+
+Bot Response
+
+You can use the contact form on this website or email us directly.
+
+Chatbot Technology
+
+Frontend only
+
+Google Gemini API
+
+Implementation
+
+Javascript fetch call to Gemini endpoint.
+
+14. Animations
+
+Animation Library
+
+Framer Motion
+
+Animations used
+
+Hero text fade in
+Card hover animations
+Project carousel scroll
+Button hover glow
+Smooth page transitions
+Scroll reveal sections
+
+15. UI Design Style
+
+Design Theme
+
+Modern Tech Corporate
+
+Colors
+
+Primary
+
+Orange
+
+Secondary
+
+Dark blue
+
+Background
+
+Light neutral
+
+Typography
+
+Headings
+
+Poppins
+
+Body
+
+Inter
+
+16. Performance Requirements
+
+Page load under 2 seconds.
+
+Lazy loading images.
+
+SEO friendly structure.
+
+Responsive design.
+
+17. Mobile Optimization
+
+Fully responsive.
+
+Mobile navigation menu.
+
+Touch optimized carousels.
+
+18. Security
+
+EmailJS spam protection.
+
+reCAPTCHA for forms.
+
+Secure API keys for Gemini.
+
+19. Analytics
+
+Google Analytics integration.
+
+Track
+
+Page visits
+Conversion rates
+Contact submissions
+
+20. Future Features
+
+Client dashboard
+Blog section
+Case studies
+Admin panel
+AI project estimator
+![alt text](image.png)
