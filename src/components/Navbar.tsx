@@ -94,7 +94,7 @@ export default function Navbar() {
 
                     {/* Mobile Menu Toggle */}
                     <button
-                        className="md:hidden p-2 text-foreground/80 hover:text-primary transition-colors"
+                        className="md:hidden p-2 text-foreground/80 hover:text-primary transition-colors z-50 pointer-events-auto"
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle menu"
                     >
