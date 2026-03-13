@@ -1,15 +1,16 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getFormattedKnowledge } from "../data/chatbotKnowledge";
 
-// Initialize the Gemini AI
-// Next.js uses process.env instead of import.meta.env
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-
 const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
 
-// Get the generative model
+// System prompt with knowledge base
+const systemPrompt = getFormattedKnowledge();
+
+// Get the generative model with system instructions
 const model = genAI?.getGenerativeModel({
-    model: "gemini-1.5-flash", // Updated to a stable, widely available version
+    model: "gemini-2.0-flash",
+    systemInstruction: systemPrompt,
     generationConfig: {
         temperature: 0.7,
         topK: 40,
@@ -18,42 +19,47 @@ const model = genAI?.getGenerativeModel({
     }
 });
 
-// System prompt with knowledge base
-const systemPrompt = getFormattedKnowledge();
+// Error sentinel values — caught and shown gracefully in the UI
+export const DEMO_MODE = "DEMO_MODE_ACTIVE";
+export const QUOTA_EXCEEDED = "QUOTA_EXCEEDED";
+export const API_ERROR = "API_ERROR";
 
-/**
- * Send a message to the Gemini AI chatbot
- * @param {string} userMessage - The user's message
- * @param {Array} chatHistory - Previous chat messages for context
- * @returns {Promise<string>} - The AI's response
- */
-export const sendMessage = async (userMessage: string, chatHistory: { role: string; content: string }[] = []) => {
+export const sendMessage = async (
+    userMessage: string,
+    chatHistory: { role: string; content: string }[] = []
+): Promise<string> => {
+    // No API key configured
     if (!genAI || !model || !apiKey || apiKey === "your_api_key_here") {
-        return "DEMO_MODE_ACTIVE";
+        return DEMO_MODE;
     }
 
     try {
-        // Build the conversation context
-        const conversationContext = chatHistory
-            .map(msg => `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}`)
-            .join("\n");
+        // Gemini requires conversation to START with a "user" turn.
+        // Skip any leading bot/model messages (e.g. the initial greeting).
+        const firstUserIndex = chatHistory.findIndex(msg => msg.role === "user");
+        const validHistory = firstUserIndex >= 0 ? chatHistory.slice(firstUserIndex) : [];
 
-        // Combine system prompt, conversation history, and new message
-        const fullPrompt = `${systemPrompt}
+        const contents = [
+            ...validHistory.map(msg => ({
+                role: msg.role === "user" ? "user" : "model",
+                parts: [{ text: msg.content }]
+            })),
+            { role: "user", parts: [{ text: userMessage }] }
+        ];
 
-${conversationContext ? `Previous conversation:\n${conversationContext}\n` : ""}
-User: ${userMessage}
-
-Assistant:`;
-
-        // Generate response from Gemini AI
-        const result = await model.generateContent(fullPrompt);
-        const response = await result.response;
-        const text = response.text();
-
+        const result = await model.generateContent({ contents });
+        const text = result.response.text();
         return text;
-    } catch (error) {
-        console.error("Error sending message to Gemini AI:", error);
-        throw new Error("Failed to get response from AI. Please try again.");
+
+    } catch (error: unknown) {
+        console.error("Gemini API error:", error);
+
+        // Detect quota / rate-limit errors (429)
+        const isQuota =
+            (error instanceof Error && error.message.includes("429")) ||
+            (typeof error === "object" && error !== null && (error as { status?: number }).status === 429);
+
+        if (isQuota) return QUOTA_EXCEEDED;
+        return API_ERROR;
     }
 };

@@ -60,6 +60,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "RV Tech Labs",
+              url: "https://rvtechlabs.in",
+              sameAs: [
+                "https://linkedin.com/company/rvtechlabs",
+                "https://instagram.com/rvtechlabs",
+              ],
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} ${poppins.variable} antialiased min-h-screen flex flex-col`}
       >

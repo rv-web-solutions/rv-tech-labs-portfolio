@@ -54,7 +54,7 @@ export default function ServicesContent() {
     const fadeInUp = {
         initial: { opacity: 0, y: 20 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
+        viewport: { once: false },
         transition: { duration: 0.6 }
     };
 
@@ -98,7 +98,7 @@ export default function ServicesContent() {
                             id={service.id}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            viewport={{ once: false }}
                             transition={{ duration: 0.8 }}
                             className={`flex flex-col lg:flex-row gap-12 lg:gap-20 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}
                         >
@@ -119,7 +119,7 @@ export default function ServicesContent() {
                                     initial={{ scale: 0.9, opacity: 0 }}
                                     whileInView={{ scale: 1, opacity: 1 }}
                                     transition={{ delay: 0.3 }}
-                                    viewport={{ once: true }}
+                                    viewport={{ once: false }}
                                     className="relative z-10 w-full max-w-sm bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50"
                                 >
                                     <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-8 border border-slate-100">

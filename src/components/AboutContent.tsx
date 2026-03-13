@@ -34,9 +34,9 @@ const founders = [
         image: "/founder.jpg"
     },
     {
-        name: "RV Tech Strategy Team",
-        role: "Co-Founders",
-        bio: "A collective of industry-leading architects and strategists dedicated to delivering digital excellence.",
+        name: "Ramu Atika",
+        role: "Co-Founder & Team",
+        bio: "A visionary co-founder and his team of industry-leading architects and strategists dedicated to delivering digital excellence at RV Tech Labs.",
         image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=400&h=400"
     }
 ];
@@ -45,14 +45,14 @@ export default function AboutContent() {
     const fadeInUp = {
         initial: { opacity: 0, y: 20 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
+        viewport: { once: false },
         transition: { duration: 0.6 }
     };
 
     const staggerContainer = {
         initial: {},
         whileInView: { transition: { staggerChildren: 0.1 } },
-        viewport: { once: true }
+        viewport: { once: false }
     };
 
     return (

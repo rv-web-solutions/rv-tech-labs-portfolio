@@ -11,14 +11,14 @@ export default function HomeContent() {
     const fadeInUp = {
         initial: { opacity: 0, y: 20 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
+        viewport: { once: false },
         transition: { duration: 0.6 }
     };
 
     const staggerContainer = {
         initial: {},
         whileInView: { transition: { staggerChildren: 0.1 } },
-        viewport: { once: true }
+        viewport: { once: false }
     };
 
     return (
@@ -201,7 +201,7 @@ export default function HomeContent() {
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false }}
                     className="w-full"
                 >
                     <Carousel speed={35} items={[
@@ -257,7 +257,7 @@ export default function HomeContent() {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false }}
                         transition={{ duration: 0.6 }}
                         className="max-w-4xl mx-auto bg-white border border-slate-100 shadow-2xl rounded-3xl p-10 md:p-16 text-center transform transition-transform hover:scale-[1.01] duration-500"
                     >
