@@ -56,7 +56,7 @@ export default function AboutContent() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-white">
+        <div className="flex flex-col min-h-screen bg-transparent">
             {/* Hero Section */}
             <section className="bg-slate-50 pt-16 pb-24 border-b border-slate-100">
                 <div className="container mx-auto px-4 text-center max-w-4xl">

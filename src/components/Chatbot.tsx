@@ -196,7 +196,7 @@ export default function Chatbot() {
                         className="flex items-end gap-2.5 max-w-[88%] mr-auto"
                       >
                         <BotAvatar />
-                        <div className="py-3 px-4 rounded-2xl bg-white border border-slate-100 rounded-bl-sm flex items-center gap-1.5">
+                         <div className="py-3 px-4 rounded-2xl bg-white border border-slate-100 rounded-bl-sm flex items-center gap-1.5">
                           <motion.div className="w-2 h-2 bg-primary/60 rounded-full" animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.7, delay: 0 }} />
                           <motion.div className="w-2 h-2 bg-primary/60 rounded-full" animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.7, delay: 0.15 }} />
                           <motion.div className="w-2 h-2 bg-primary/60 rounded-full" animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 0.7, delay: 0.3 }} />
@@ -214,7 +214,7 @@ export default function Chatbot() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="px-4 pt-3 pb-1 bg-white border-t border-slate-100 overflow-x-auto shrink-0"
+                         className="px-4 pt-3 pb-1 bg-white border-t border-slate-100 overflow-x-auto shrink-0"
                       >
                         <p className="text-[10px] text-slate-400 mb-2 font-medium uppercase tracking-wide">Quick Questions</p>
                         <div className="flex gap-2 pb-2 overflow-x-auto no-scrollbar">
@@ -222,7 +222,7 @@ export default function Chatbot() {
                             <button
                               key={i}
                               onClick={() => handleSendMessage(null, q)}
-                              className="text-[11px] text-primary border border-primary/30 bg-primary/5 hover:bg-primary hover:text-white rounded-full px-3 py-1.5 whitespace-nowrap transition-all shrink-0"
+                               className="text-[11px] text-primary border border-primary/30 bg-primary/5 hover:bg-primary hover:text-white rounded-full px-3 py-1.5 whitespace-nowrap transition-all shrink-0"
                             >
                               {q}
                             </button>
@@ -233,14 +233,14 @@ export default function Chatbot() {
                   </AnimatePresence>
 
                   {/* Input Area */}
-                  <div className="p-4 bg-white border-t border-slate-100 shrink-0">
+                   <div className="p-4 bg-white border-t border-slate-100 shrink-0">
                     <form onSubmit={handleSendMessage} className="relative flex items-center">
                       <input
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder="Ask me anything about RV Tech Labs..."
-                        className="w-full bg-slate-50 border border-slate-200 text-sm rounded-full pl-5 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-700 placeholder:text-slate-400"
+                         className="w-full bg-slate-50 border border-slate-200 text-sm rounded-full pl-5 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-700 placeholder:text-slate-400"
                         disabled={isLoading}
                       />
                       <button

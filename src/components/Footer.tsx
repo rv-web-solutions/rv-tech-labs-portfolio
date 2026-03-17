@@ -8,122 +8,112 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-slate-900 border-t border-slate-800 text-slate-300 pt-16 pb-8">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <footer className="relative bg-slate-900 border-t border-slate-800 text-slate-300 pt-20 pb-10 transition-colors duration-300 overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+            
+            <div className="container mx-auto px-4 md:px-6 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
                     {/* Brand Info */}
-                    <div className="space-y-6">
-                        <Link href="/" className="flex items-center gap-2 group w-max">
-                            <div className="relative w-16 h-16 flex items-center justify-center">
+                    <div className="space-y-8">
+                        <Link href="/" className="flex items-center gap-3 group w-max">
+                            <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center p-1 bg-white/10 rounded-2xl backdrop-blur-md border border-white/10 group-hover:border-primary/30 transition-all duration-300">
                                 <Image
                                     src="/icon.png"
                                     alt="RV Techlabs Logo"
                                     width={90}
                                     height={90}
-                                    className="w-full h-full object-contain rounded-full shadow-md"
+                                    className="w-full h-full object-contain rounded-xl"
                                 />
                             </div>
-                            <span className="font-heading font-bold text-xl tracking-tight text-white">
-                                RV Tech<span className="text-primary">labs</span>
+                            <span className="font-heading font-extrabold text-2xl tracking-tighter text-white">
+                                RV Tech<span className="text-primary italic">labs</span>
                             </span>
                         </Link>
-                        <p className="text-sm leading-relaxed text-slate-400">
+                        <p className="text-base leading-relaxed text-slate-400 max-w-xs">
                             Empowering businesses with smart digital solutions. From custom web development to powerful mobile apps and strategic content promotion.
                         </p>
-                        <div className="flex items-center gap-4">
-                            <a href="https://www.linkedin.com/company/rv-tech-labs" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
-                                <Linkedin className="w-5 h-5" />
-                                <span className="sr-only">LinkedIn</span>
-                            </a>
-                            <a href="https://twitter.com/rvtechlabs" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
-                                <Twitter className="w-5 h-5" />
-                                <span className="sr-only">Twitter</span>
-                            </a>
-                            <a href="https://facebook.com/rvtechlabs" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
-                                <Facebook className="w-5 h-5" />
-                                <span className="sr-only">Facebook</span>
-                            </a>
-                            <a href="https://instagram.com/rvtechlabs" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
-                                <Instagram className="w-5 h-5" />
-                                <span className="sr-only">Instagram</span>
-                            </a>
+                        <div className="flex items-center gap-5">
+                            {[
+                                { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/rv-tech-labs", label: "LinkedIn" },
+                                { icon: <Twitter className="w-5 h-5" />, href: "https://twitter.com/rvtechlabs", label: "Twitter" },
+                                { icon: <Facebook className="w-5 h-5" />, href: "https://facebook.com/rvtechlabs", label: "Facebook" },
+                                { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com/rvtechlabs", label: "Instagram" }
+                            ].map((social, i) => (
+                                <a 
+                                    key={i}
+                                    href={social.href} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all duration-300 border border-slate-700/50"
+                                >
+                                    {social.icon}
+                                    <span className="sr-only">{social.label}</span>
+                                </a>
+                            ))}
                         </div>
                     </div>
 
                     {/* Quick Links */}
                     <div>
-                        <h3 className="text-white font-semibold font-heading mb-6 tracking-wide uppercase text-sm">Company</h3>
-                        <ul className="space-y-4">
-                            <li>
-                                <Link href="/about" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                    <span className="h-[1px] w-2 bg-slate-700"></span> About Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/services" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                    <span className="h-[1px] w-2 bg-slate-700"></span> Services
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/careers" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                    <span className="h-[1px] w-2 bg-slate-700"></span> Careers
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/projects" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                    <span className="h-[1px] w-2 bg-slate-700"></span> Projects
-                                </Link>
-                            </li>
+                        <h3 className="text-white font-bold font-heading mb-8 tracking-[0.15em] uppercase text-xs">Company</h3>
+                        <ul className="space-y-5">
+                            {['About Us', 'Services', 'Careers', 'Projects'].map((item) => (
+                                <li key={item}>
+                                    <Link href={`/${item.toLowerCase().replace(' ', '')}`} className="text-slate-400 hover:text-primary transition-all text-sm flex items-center gap-3 group">
+                                        <span className="h-[1px] w-0 bg-primary group-hover:w-4 transition-all duration-300"></span> 
+                                        {item}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
                     {/* Services */}
                     <div>
-                        <h3 className="text-white font-semibold font-heading mb-6 tracking-wide uppercase text-sm">Services</h3>
-                        <ul className="space-y-4">
-                            <li>
-                                <Link href="/services#web" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                    <span className="h-[1px] w-2 bg-slate-700"></span> Web Development
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/services#app" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                    <span className="h-[1px] w-2 bg-slate-700"></span> App Development
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/services#content" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                    <span className="h-[1px] w-2 bg-slate-700"></span> Content Promotion
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="/services" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
-                                    <span className="h-[1px] w-2 bg-slate-700"></span> Tech Consulting
-                                </Link>
-                            </li>
+                        <h3 className="text-white font-bold font-heading mb-8 tracking-[0.15em] uppercase text-xs">Services</h3>
+                        <ul className="space-y-5">
+                            {[
+                                { name: 'Web Development', href: '/services#web' },
+                                { name: 'App Development', href: '/services#app' },
+                                { name: 'Content Promotion', href: '/services#content' },
+                                { name: 'Tech Consulting', href: '/services' }
+                            ].map((service) => (
+                                <li key={service.name}>
+                                    <Link href={service.href} className="text-slate-400 hover:text-primary transition-all text-sm flex items-center gap-3 group">
+                                        <span className="h-[1px] w-0 bg-primary group-hover:w-4 transition-all duration-300"></span> 
+                                        {service.name}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
                     {/* Contact */}
                     <div>
-                        <h3 className="text-white font-semibold font-heading mb-6 tracking-wide uppercase text-sm">Get in Touch</h3>
-                        <ul className="space-y-5">
+                        <h3 className="text-white font-bold font-heading mb-8 tracking-[0.15em] uppercase text-xs">Get in Touch</h3>
+                        <ul className="space-y-6">
                             <li className="flex items-start gap-4">
-                                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                                <div className="mt-1 p-2 bg-slate-800/50 rounded-lg text-primary border border-slate-700/50">
+                                    <MapPin className="w-4 h-4" />
+                                </div>
                                 <span className="text-sm text-slate-400 leading-relaxed">
                                     kukatpally, Hyderabad,<br />telangana, india
                                 </span>
                             </li>
                             <li className="flex items-center gap-4">
-                                <Phone className="w-5 h-5 text-primary shrink-0" />
-                                <a href="tel:6305393760" className="text-sm text-slate-400 hover:text-white transition-colors">
+                                <div className="p-2 bg-slate-800/50 rounded-lg text-primary border border-slate-700/50">
+                                    <Phone className="w-4 h-4" />
+                                </div>
+                                <a href="tel:6305393760" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
                                     6305393760
                                 </a>
                             </li>
                             <li className="flex items-center gap-4">
-                                <Mail className="w-5 h-5 text-primary shrink-0" />
-                                <a href="mailto:contactrvtechlabs@gmail.com" className="text-sm text-slate-400 hover:text-white transition-colors">
+                                <div className="p-2 bg-slate-800/50 rounded-lg text-primary border border-slate-700/50">
+                                    <Mail className="w-4 h-4" />
+                                </div>
+                                <a href="mailto:contactrvtechlabs@gmail.com" className="text-sm text-slate-400 hover:text-white transition-colors font-medium">
                                     contactrvtechlabs@gmail.com
                                 </a>
                             </li>
@@ -132,15 +122,15 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom */}
-                <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-slate-500 text-sm text-center md:text-left">
+                <div className="pt-10 border-t border-slate-800/50 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <p className="text-slate-500 text-sm font-medium">
                         &copy; {currentYear} RV Tech Labs. All rights reserved.
                     </p>
-                    <div className="flex items-center gap-6">
-                        <Link href="/privacy" className="text-slate-500 hover:text-slate-300 text-sm transition-colors">
+                    <div className="flex items-center gap-8">
+                        <Link href="/privacy" className="text-slate-500 hover:text-slate-300 text-xs md:text-sm font-medium transition-colors">
                             Privacy Policy
                         </Link>
-                        <Link href="/terms" className="text-slate-500 hover:text-slate-300 text-sm transition-colors">
+                        <Link href="/terms" className="text-slate-500 hover:text-slate-300 text-xs md:text-sm font-medium transition-colors">
                             Terms of Service
                         </Link>
                     </div>

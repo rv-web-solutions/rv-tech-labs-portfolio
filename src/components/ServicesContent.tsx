@@ -59,7 +59,7 @@ export default function ServicesContent() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-white">
+        <div className="flex flex-col min-h-screen bg-transparent">
             {/* Header */}
             <section className="bg-slate-50 pt-16 pb-24 text-center px-4 border-b border-slate-100">
                 <div className="container mx-auto max-w-4xl">

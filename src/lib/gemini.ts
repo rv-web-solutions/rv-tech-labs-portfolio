@@ -1,24 +1,3 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { getFormattedKnowledge } from "../data/chatbotKnowledge";
-
-const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
-const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
-
-// System prompt with knowledge base
-const systemPrompt = getFormattedKnowledge();
-
-// Get the generative model with system instructions
-const model = genAI?.getGenerativeModel({
-    model: "gemini-2.0-flash",
-    systemInstruction: systemPrompt,
-    generationConfig: {
-        temperature: 0.7,
-        topK: 40,
-        topP: 0.95,
-        maxOutputTokens: 1024,
-    }
-});
-
 // Error sentinel values — caught and shown gracefully in the UI
 export const DEMO_MODE = "DEMO_MODE_ACTIVE";
 export const QUOTA_EXCEEDED = "QUOTA_EXCEEDED";
@@ -28,38 +7,32 @@ export const sendMessage = async (
     userMessage: string,
     chatHistory: { role: string; content: string }[] = []
 ): Promise<string> => {
-    // No API key configured
-    if (!genAI || !model || !apiKey || apiKey === "your_api_key_here") {
-        return DEMO_MODE;
-    }
-
     try {
-        // Gemini requires conversation to START with a "user" turn.
-        // Skip any leading bot/model messages (e.g. the initial greeting).
-        const firstUserIndex = chatHistory.findIndex(msg => msg.role === "user");
-        const validHistory = firstUserIndex >= 0 ? chatHistory.slice(firstUserIndex) : [];
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                message: userMessage,
+                history: chatHistory,
+            })
+        });
 
-        const contents = [
-            ...validHistory.map(msg => ({
-                role: msg.role === "user" ? "user" : "model",
-                parts: [{ text: msg.content }]
-            })),
-            { role: "user", parts: [{ text: userMessage }] }
-        ];
+        if (!response.ok) {
+            if (response.status === 429) return QUOTA_EXCEEDED;
+            if (response.status === 500) {
+                const data = await response.json();
+                if (data.error === "API key not configured") return DEMO_MODE;
+            }
+            return API_ERROR;
+        }
 
-        const result = await model.generateContent({ contents });
-        const text = result.response.text();
-        return text;
+        const data = await response.json();
+        return data.text || "";
 
     } catch (error: unknown) {
-        console.error("Gemini API error:", error);
-
-        // Detect quota / rate-limit errors (429)
-        const isQuota =
-            (error instanceof Error && error.message.includes("429")) ||
-            (typeof error === "object" && error !== null && (error as { status?: number }).status === 429);
-
-        if (isQuota) return QUOTA_EXCEEDED;
+        console.error("Chat client error:", error);
         return API_ERROR;
     }
 };

@@ -78,7 +78,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${poppins.variable} antialiased min-h-screen flex flex-col`}
+        className={`${inter.variable} ${poppins.variable} antialiased min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300`}
       >
         <Navbar />
         <main className="flex-1 pt-[72px]">

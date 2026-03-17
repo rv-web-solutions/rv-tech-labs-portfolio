@@ -69,7 +69,7 @@ export default function Navbar() {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className={`relative px-3 py-2 text-sm font-medium transition-colors ${isActive ? "text-primary" : "text-foreground/80 hover:text-primary"
+                                    className={`relative px-3 py-2 text-sm font-medium transition-colors ${isActive ? "text-primary" : "text-slate-600 hover:text-primary"
                                         }`}
                                 >
                                     {link.name}
@@ -92,14 +92,16 @@ export default function Navbar() {
                         </Link>
                     </nav>
 
-                    {/* Mobile Menu Toggle */}
-                    <button
-                        className="md:hidden p-2 text-foreground/80 hover:text-primary transition-colors z-50 pointer-events-auto"
-                        onClick={() => setIsOpen(!isOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button>
+                    {/* Mobile Menu Actions */}
+                    <div className="md:hidden flex items-center gap-2 pointer-events-auto">
+                        <button
+                            className="p-2 text-foreground/80 hover:text-primary transition-colors z-50"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -110,7 +112,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="absolute top-20 left-4 right-4 md:hidden bg-white/95 backdrop-blur-md border border-slate-100 overflow-hidden shadow-2xl rounded-3xl pointer-events-auto"
+                        className="absolute top-24 left-4 right-4 md:hidden bg-white/95 backdrop-blur-md border border-slate-100 overflow-hidden shadow-2xl rounded-3xl pointer-events-auto z-50"
                     >
                         <div className="flex flex-col px-4 py-6 gap-2">
                             {navLinks.map((link) => {
@@ -122,8 +124,8 @@ export default function Navbar() {
                                         onClick={() => setIsOpen(false)}
                                         className={`block px-5 py-3 rounded-2xl text-base font-medium transition-colors ${isActive
                                             ? "bg-primary/10 text-primary"
-                                            : "text-foreground/80 hover:bg-gray-50 hover:text-primary"
-                                            }`}
+                                            : "text-slate-600 hover:bg-slate-50 hover:text-primary"
+                                             }`}
                                     >
                                         {link.name}
                                     </Link>

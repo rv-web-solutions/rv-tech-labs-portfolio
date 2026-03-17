@@ -70,22 +70,24 @@ export default function ProjectsContent() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50">
+        <div className="flex flex-col min-h-screen bg-transparent">
             {/* Header */}
-            <section className="bg-slate-900 pt-16 pb-24 text-center px-4">
-                <div className="container mx-auto max-w-4xl">
+            <section className="bg-slate-900 pt-24 pb-24 md:pt-32 md:pb-32 text-center px-4 relative overflow-hidden border-b border-slate-800">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+                <div className="container mx-auto max-w-4xl relative z-10">
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading text-white mb-6"
+                        className="text-4xl md:text-7xl font-bold font-heading text-white mb-6 md:mb-8 leading-[1.1]"
                     >
-                        Featured <span className="text-primary">Work</span>
+                        Featured <span className="text-primary font-extrabold uppercase tracking-tight">Work</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto"
+                        className="text-lg md:text-2xl text-slate-300 leading-relaxed max-w-2xl mx-auto"
                     >
                         A selection of recent projects built by our team. We love turning complex problems into elegant digital products.
                     </motion.p>
@@ -93,58 +95,58 @@ export default function ProjectsContent() {
             </section>
 
             {/* Projects Grid Container */}
-            <section className="py-24">
+            <section className="py-20 md:py-32">
                 <div className="container mx-auto px-4 md:px-6 max-w-7xl">
                     <motion.div
                         variants={staggerContainer}
                         initial="initial"
                         whileInView="whileInView"
-                        viewport={{ once: false }}
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                        viewport={{ once: true }}
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
                     >
                         {projects.map((project, idx) => (
                             <motion.div
                                 key={idx}
                                 variants={fadeInUp}
-                                className="group relative bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col"
+                                className="group relative bg-white backdrop-blur-sm rounded-[2.5rem] overflow-hidden shadow-sm border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col"
                             >
-                                <div className={`h-56 w-full ${project.bgType} relative overflow-hidden flex items-center justify-center border-b border-slate-100`}>
+                                <div className={`h-64 md:h-72 w-full ${project.bgType} relative overflow-hidden flex items-center justify-center border-b border-slate-100`}>
                                     <Image
                                         src={project.image}
                                         alt={project.title}
                                         fill
-                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                                    <div className="absolute top-4 right-4 bg-white p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all z-20">
+                                    <div className="absolute top-6 right-6 bg-white p-3.5 rounded-full shadow-2xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 z-20 border border-slate-100">
                                         <ArrowUpRight className="w-5 h-5 text-primary" />
                                     </div>
 
-                                    {/* Desktop Frame Overlay - Minimal */}
-                                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] h-8 bg-white/10 backdrop-blur-md rounded-t-lg border-t border-x border-white/20 z-10 hidden group-hover:flex items-center px-3 gap-1.5 transition-all">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white/40"></div>
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white/40"></div>
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white/40"></div>
+                                    {/* Frame Overlay */}
+                                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[90%] h-10 bg-white/20 backdrop-blur-xl rounded-t-2xl border-t border-x border-white/30 z-10 hidden group-hover:flex items-center px-4 gap-2 transition-all">
+                                        <div className="w-2 h-2 rounded-full bg-white/40"></div>
+                                        <div className="w-2 h-2 rounded-full bg-white/40"></div>
+                                        <div className="w-2 h-2 rounded-full bg-white/40"></div>
                                     </div>
                                 </div>
 
-                                <div className="p-8 flex-1 flex flex-col">
-                                    <div className="text-xs font-bold tracking-wider uppercase text-primary mb-3">
+                                <div className="p-8 md:p-10 flex-1 flex flex-col">
+                                    <div className="text-xs font-extrabold tracking-[0.2em] uppercase text-primary mb-4">
                                         {project.category}
                                     </div>
 
-                                    <h3 className="text-2xl font-bold font-heading text-slate-900 mb-3 group-hover:text-primary transition-colors">
+                                    <h3 className="text-2xl md:text-3xl font-bold font-heading text-slate-900 mb-4 group-hover:text-primary transition-colors">
                                         {project.title}
                                     </h3>
 
-                                    <p className="text-slate-600 mb-6 flex-1 line-clamp-3">
+                                    <p className="text-base md:text-lg text-slate-600 mb-8 flex-1 line-clamp-3 leading-relaxed">
                                         {project.description}
                                     </p>
 
                                     <div className="flex items-center gap-2 flex-wrap">
                                         {project.tech.map((t, i) => (
-                                            <span key={i} className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-medium">
+                                            <span key={i} className="px-4 py-1.5 bg-slate-100 text-slate-600 rounded-full text-xs md:text-sm font-bold border border-slate-200">
                                                 {t}
                                             </span>
                                         ))}
