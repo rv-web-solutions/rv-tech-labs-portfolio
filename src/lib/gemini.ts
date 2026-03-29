@@ -6,7 +6,7 @@ export const API_ERROR = "API_ERROR";
 export const sendMessage = async (
     userMessage: string,
     chatHistory: { role: string; content: string }[] = []
-): Promise<string> => {
+): Promise<Response | string> => {
     try {
         const response = await fetch("/api/chat", {
             method: "POST",
@@ -28,8 +28,7 @@ export const sendMessage = async (
             return API_ERROR;
         }
 
-        const data = await response.json();
-        return data.text || "";
+        return response; // Return the full response for streaming
 
     } catch (error: unknown) {
         console.error("Chat client error:", error);

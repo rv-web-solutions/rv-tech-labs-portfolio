@@ -51,22 +51,59 @@ export default function Chatbot() {
     setIsLoading(true);
 
     try {
-      const responseText = await sendMessage(userMsg, messages);
+      const result = await sendMessage(userMsg, messages);
 
-      // Handle sentinel error codes returned by gemini.ts
-      const botContent =
-        responseText === "DEMO_MODE_ACTIVE"
-          ? "The AI assistant is currently in demo mode. The API key is not configured — please contact us via our Contact page!"
-          : responseText === "QUOTA_EXCEEDED"
-          ? "I'm sorry, I'm having trouble connecting right now. Please try again later or visit our Contact page."
-          : responseText === "API_ERROR"
-          ? "I'm sorry, I'm having trouble connecting right now. Please try again later or visit our Contact page."
-          : responseText;
+      if (typeof result === "string") {
+        // Handle sentinel error codes returned by gemini.ts
+        const botContent =
+          result === "DEMO_MODE_ACTIVE"
+            ? "The AI assistant is currently in demo mode. The API key is not configured — please contact us via our Contact page!"
+            : result === "QUOTA_EXCEEDED"
+            ? "I'm sorry, I'm having trouble connecting right now. Please try again later or visit our Contact page."
+            : result === "API_ERROR"
+            ? "I'm sorry, I'm having trouble connecting right now. Please try again later or visit our Contact page."
+            : result;
 
-      setMessages((prev) => [
-        ...prev,
-        { id: Date.now().toString(), role: "bot", content: botContent },
-      ]);
+        setMessages((prev) => [
+          ...prev,
+          { id: Date.now().toString(), role: "bot", content: botContent },
+        ]);
+        setIsLoading(false);
+      } else {
+        // Handle Response stream
+        const botMessageId = Date.now().toString();
+        setMessages((prev) => [
+          ...prev,
+          { id: botMessageId, role: "bot", content: "" },
+        ]);
+        setIsLoading(false); // Remove loading indicator once streaming starts
+
+        const reader = result.body?.getReader();
+        const decoder = new TextDecoder();
+        let fullContent = "";
+
+        if (reader) {
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+
+              const chunk = decoder.decode(value);
+              fullContent += chunk;
+
+              setMessages((prev) =>
+                prev.map((msg) =>
+                  msg.id === botMessageId ? { ...msg, content: fullContent } : msg
+                )
+              );
+            }
+          } catch (error) {
+            console.error("Stream reading error:", error);
+          } finally {
+            reader.releaseLock();
+          }
+        }
+      }
     } catch {
       // Fallback — gemini.ts should never throw, but just in case
       setMessages((prev) => [
@@ -77,7 +114,6 @@ export default function Chatbot() {
           content: "I'm sorry, I'm having trouble connecting right now. Please try again later or visit our Contact page."
         },
       ]);
-    } finally {
       setIsLoading(false);
     }
   };

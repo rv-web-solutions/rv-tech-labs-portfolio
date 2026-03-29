@@ -32,6 +32,7 @@ export async function POST(req: Request) {
                 ],
                 temperature: 0.7,
                 max_tokens: 1024,
+                stream: true, // Enable streaming
             })
         });
 
@@ -41,10 +42,54 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "External API error" }, { status: response.status });
         }
 
-        const data = await response.json();
-        const text = data.choices[0]?.message?.content || "";
-        
-        return NextResponse.json({ text });
+        const encoder = new TextEncoder();
+        const decoder = new TextDecoder();
+
+        const stream = new ReadableStream({
+            async start(controller) {
+                const reader = response.body?.getReader();
+                if (!reader) {
+                    controller.close();
+                    return;
+                }
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split("\n").filter(line => line.trim() !== "");
+
+                    for (const line of lines) {
+                        if (line === "data: [DONE]") {
+                            controller.close();
+                            return;
+                        }
+
+                        if (line.startsWith("data: ")) {
+                            try {
+                                const data = JSON.parse(line.substring(6));
+                                const text = data.choices[0]?.delta?.content || "";
+                                if (text) {
+                                    controller.enqueue(encoder.encode(text));
+                                }
+                            } catch (e) {
+                                console.error("Error parsing stream chunk:", e);
+                            }
+                        }
+                    }
+                }
+                controller.close();
+            },
+        });
+
+        return new Response(stream, {
+            headers: {
+                "Content-Type": "text/event-stream",
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+            },
+        });
 
     } catch (error) {
         console.error("Chat API Route error:", error);
